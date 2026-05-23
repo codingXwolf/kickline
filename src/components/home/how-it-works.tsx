@@ -1,52 +1,97 @@
-import { Container, Eyebrow } from "@/components/ui";
+import Image from "next/image";
+import Link from "next/link";
+import { ButtonLink, Container, Eyebrow } from "@/components/ui";
 
-const steps = [
+type Step = {
+  number: string;
+  heading: string;
+  body: string;
+  image: string;
+  alt: string;
+};
+
+const steps: Step[] = [
   {
-    step: "01",
-    title: "Set your starting point",
-    body: "Tell Kickline your level and goals. It builds a path around the skills you want to grow — timing, speed, groove, or all of it.",
+    number: "01",
+    heading: "Choose your skill level and goals",
+    body: "Select from beginner to intermediate paths tailored to what you want to master.",
+    image: "/kickline-drum-app.jpg",
+    alt: "The Kickline app showing skill paths and goals",
   },
   {
-    step: "02",
-    title: "Practice your daily session",
-    body: "Open the app and follow a focused routine: warm-up, targeted drills, and a tempo challenge. No deciding, no drifting.",
+    number: "02",
+    heading: "Follow guided drills and exercises",
+    body: "Work through structured sessions with real-time feedback and clear progression.",
+    image: "/drummerapp.jpg",
+    alt: "The Kickline app guiding a drill session",
   },
   {
-    step: "03",
-    title: "Watch the numbers move",
-    body: "Every rep is logged. Your BPM targets rise, streaks build, and milestones unlock as the system tracks real improvement.",
+    number: "03",
+    heading: "Track your improvement over time",
+    body: "Watch metrics climb and celebrate milestones as you build consistency and speed.",
+    image: "/Layout/419/drum-app-3.jpg",
+    alt: "The Kickline progress dashboard tracking improvement",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="border-t border-border py-24">
+    <section id="how-it-works" className="py-24">
       <Container>
-        <div className="max-w-2xl">
-          <Eyebrow>How it works</Eyebrow>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Three steps to a practice habit that sticks.
+        <div className="mx-auto max-w-2xl text-center">
+          <Eyebrow>Simple</Eyebrow>
+          <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+            Get started in three steps
           </h2>
+          <p className="mt-5 text-lg leading-relaxed text-neutral-light">
+            No complicated setup. No guessing. Just open the app, pick your path,
+            and start practicing.
+          </p>
         </div>
 
-        <ol className="mt-14 grid gap-8 md:grid-cols-3">
-          {steps.map((item) => (
-            <li
-              key={item.step}
-              className="rounded-xl border border-border p-8"
-            >
-              <span className="font-display text-5xl font-bold text-dodger">
-                {item.step}
-              </span>
-              <h3 className="mt-6 text-xl font-semibold text-white">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-light">
-                {item.body}
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {steps.map((step) => (
+            <article key={step.number} className="text-center">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border">
+                <Image
+                  src={step.image}
+                  alt={step.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                />
+              </div>
+              <p className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-dodger-light">
+                Step {step.number}
               </p>
-            </li>
+              <h3 className="mt-2 text-balance text-xl font-semibold text-white">
+                {step.heading}
+              </h3>
+              <p className="mx-auto mt-2 max-w-xs text-base leading-relaxed text-neutral-light">
+                {step.body}
+              </p>
+            </article>
           ))}
-        </ol>
+        </div>
+
+        <div className="mt-12 flex items-center justify-center gap-5">
+          <ButtonLink href="/about#waitlist">Start</ButtonLink>
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-light transition-colors hover:text-dodger-light"
+          >
+            See pricing
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-4">
+              <path
+                d="M9 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
       </Container>
     </section>
   );
