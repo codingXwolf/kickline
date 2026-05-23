@@ -1,59 +1,121 @@
-import { Container, Eyebrow } from "@/components/ui";
+import Image from "next/image";
+import Link from "next/link";
+import { ButtonLink, Container } from "@/components/ui";
 
-const features = [
+type Feature = {
+  number: string;
+  label: string;
+  tagline: string;
+  heading: string;
+  body: string;
+  image: string;
+  alt: string;
+};
+
+const features: Feature[] = [
   {
-    title: "Skill-based paths",
-    body: "Structured tracks for timing, speed, coordination, and groove. Start where you are; the path adapts as you improve.",
+    number: "01",
+    label: "Structured practice",
+    tagline: "Focus",
+    heading: "Know exactly what to work on every session",
+    body: "Guided drill paths built for timing, speed, coordination, and groove. No more wasting time wondering what to practice.",
+    image: "/drums1.jpg",
+    alt: "Close-up of a drum kit's toms from above",
   },
   {
-    title: "Targeted drills",
-    body: "Double bass speed, rudiments, hand-foot independence, and timing control — each with a clear tempo target to beat.",
+    number: "02",
+    label: "Track progress",
+    tagline: "Measure",
+    heading: "See real improvement in speed and consistency",
+    body: "Watch your BPM climb, your timing tighten, and your confidence grow. Real metrics. Real results.",
+    image: "/drummerapp.jpg",
+    alt: "A drummer checking the Kickline app beside the kit",
   },
   {
-    title: "Daily routines",
-    body: "A focused session waiting every day, sized to the time you have. Open the app, count off, get to work.",
+    number: "03",
+    label: "Daily routines",
+    tagline: "Consistency",
+    heading: "Build the habit that builds the drummer",
+    body: "Short, focused sessions that fit your schedule. Stay motivated with streaks, achievements, and a practice plan that evolves with you.",
+    image: "/livedrummer.jpg",
+    alt: "A drummer performing live on stage",
   },
   {
-    title: "Tempo tracking",
-    body: "Every drill logs your BPM. Watch your numbers climb over weeks so progress is a fact, not a feeling.",
-  },
-  {
-    title: "Progress that's visible",
-    body: "Charts, streaks, and milestones turn scattered practice into a record you can look back on.",
-  },
-  {
-    title: "Built for the kit",
-    body: "Big controls, clear metronome, and a layout that survives a glance from behind the drums mid-groove.",
+    number: "04",
+    label: "Targeted drills",
+    tagline: "Master",
+    heading: "Target the techniques that matter most",
+    body: "Double bass, rudiments, hand-foot coordination, groove control. Each drill is designed to isolate and strengthen what you need.",
+    image: "/kickpedalview.jpg",
+    alt: "Close-up of a bass drum pedal",
   },
 ];
 
+function ArrowLink({ label }: { label: string }) {
+  return (
+    <Link
+      href="/about"
+      className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-light transition-colors hover:text-white"
+      aria-label={`Learn more about ${label.toLowerCase()}`}
+    >
+      <span aria-hidden>Demo</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-4">
+        <path
+          d="M9 6l6 6-6 6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </Link>
+  );
+}
+
 export function Features() {
   return (
-    <section id="features" className="border-t border-border py-24">
-      <Container>
-        <div className="max-w-2xl">
-          <Eyebrow>Everything in one practice loop</Eyebrow>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            A system, not a pile of exercises.
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-neutral-light">
-            Kickline replaces random practice with a coached routine that knows
-            what you worked on yesterday and what you should hit today.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => (
-            <div key={feature.title} className="bg-background p-8">
-              <h3 className="text-lg font-semibold text-white">
-                {feature.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-light">
-                {feature.body}
-              </p>
+    <section id="features" className="py-24">
+      <Container className="space-y-20">
+        {features.map((feature) => (
+          <article key={feature.number} className="border-t border-border pt-8">
+            <div className="flex items-center gap-4 text-sm">
+              <span className="font-display font-bold text-white">
+                {feature.number}
+              </span>
+              <span className="text-neutral-light">{feature.label}</span>
             </div>
-          ))}
-        </div>
+
+            <div className="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <p className="text-sm font-semibold text-neutral-light">
+                  {feature.tagline}
+                </p>
+                <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+                  {feature.heading}
+                </h2>
+                <p className="mt-5 max-w-md text-lg leading-relaxed text-neutral-light">
+                  {feature.body}
+                </p>
+                <div className="mt-8 flex items-center gap-5">
+                  <ButtonLink href="/about" variant="secondary" size="sm">
+                    Learn more
+                  </ButtonLink>
+                  <ArrowLink label={feature.label} />
+                </div>
+              </div>
+
+              <div className="relative aspect-square overflow-hidden rounded-2xl border border-border">
+                <Image
+                  src={feature.image}
+                  alt={feature.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+            </div>
+          </article>
+        ))}
       </Container>
     </section>
   );
