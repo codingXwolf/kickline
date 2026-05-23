@@ -79,7 +79,7 @@ export function Features() {
         {features.map((feature) => (
           <article key={feature.number} className="border-t border-border pt-8">
             <div className="flex items-center gap-4 text-sm">
-              <span className="font-display font-bold text-white">
+              <span className="font-display font-bold text-dodger">
                 {feature.number}
               </span>
               <span className="text-neutral-light">{feature.label}</span>
@@ -87,7 +87,7 @@ export function Features() {
 
             <div className="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <div>
-                <p className="text-sm font-semibold text-neutral-light">
+                <p className="text-sm font-semibold uppercase tracking-[0.12em] text-dodger-light">
                   {feature.tagline}
                 </p>
                 <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">

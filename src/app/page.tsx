@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { Features } from "@/components/home/features";
+import { Toolkit } from "@/components/home/toolkit";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { TrainingPaths } from "@/components/home/training-paths";
 import { Results } from "@/components/home/results";
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <Hero />
       <Features />
+      <Toolkit />
       <HowItWorks />
       <TrainingPaths />
       <Results />
