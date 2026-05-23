@@ -1,0 +1,24 @@
+<svg width="880" height="300" viewBox="0 0 880 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kickline">
+  <!-- Icon tile -->
+  <g transform="translate(20,20)">
+    <rect x="0" y="0" width="260" height="260" rx="56" fill="#171A21" stroke="#2A2F3A" stroke-width="6"/>
+
+    <!-- Rhythm line behind the K -->
+    <path d="M38 156 H82 L102 118 L132 186 L164 126 H222"
+          stroke="#60A5FA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+    <!-- K -->
+    <g transform="translate(58,48)">
+      <rect x="0" y="8" width="18" height="156" rx="9" fill="#F5F7FA"/>
+      <path d="M22 86 L104 18" stroke="#F5F7FA" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22 86 L108 152" stroke="#F5F7FA" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="22" cy="86" r="7" fill="#171A21"/>
+      <!-- Drumstick tips -->
+      <circle cx="110" cy="14" r="11" fill="#3B82F6"/>
+      <circle cx="114" cy="156" r="11" fill="#3B82F6"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="320" y="190" fill="#F5F7FA" font-size="110" font-family="Arial, Helvetica, sans-serif" font-weight="700" letter-spacing="1.5">KICKLINE</text>
+</svg>

@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* ── Fonts ──────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* ── Primitive colors ───────────────────────────────────── */
+  --color-white: #ffffff;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-neutral-lightest: #f2f2f2;
+  --color-neutral-lighter: #d9d9da;
+  --color-neutral-light: #b4b4b5;
+  --color-neutral: #838384;
+  --color-neutral-dark: #525252;
+  --color-neutral-darker: #202021;
+  --color-neutral-darkest: #080809;
+
+  --color-woodsmoke-lightest: #e6e7e7;
+  --color-woodsmoke-lighter: #cecfcf;
+  --color-woodsmoke-light: #565759;
+  --color-woodsmoke: #0e0f12;
+  --color-woodsmoke-dark: #0b0c0e;
+  --color-woodsmoke-darker: #050607;
+  --color-woodsmoke-darkest: #040405;
+
+  --color-catskill-lightest: #fefefe;
+  --color-catskill-lighter: #fdfdfe;
+  --color-catskill-light: #f8f9fb;
+  --color-catskill: #f5f7fa;
+  --color-catskill-dark: #c4c5c8;
+  --color-catskill-darker: #626264;
+  --color-catskill-darkest: #494a4b;
+
+  --color-dodger-lightest: #ebf2fe;
+  --color-dodger-lighter: #d7e6fd;
+  --color-dodger-light: #75a7f8;
+  --color-dodger: #3b82f6;
+  --color-dodger-dark: #2f68c4;
+  --color-dodger-darker: #173462;
+  --color-dodger-darkest: #112749;
+
+  --color-gull-lightest: #f4f5f7;
+  --color-gull-lighter: #eaecef;
+  --color-gull-light: #b8bfc9;
+  --color-gull: #9aa4b2;
+  --color-gull-dark: #7b838e;
+  --color-gull-darker: #3d4147;
+  --color-gull-darkest: #2e3135;
+
+  /* ── Semantic (Color Scheme 3 — deepest dark, primary brand) ── */
+  --color-background: #040405;
+  --color-foreground: #050607;
+  --color-text: #ffffff;
+  --color-border: rgb(255 255 255 / 0.2);
+  --color-accent: #3b82f6;
+  --color-muted: #838384;
+
+  /* ── Radius ─────────────────────────────────────────────── */
+  /* Figma kit defines Small/Medium/Large — all 8px. Buttons use a
+     full pill (rounded-full) rather than a radius token. */
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+
+  /* ── Shadows (Figma effect styles xxsmall → xxlarge) ─────── */
+  --shadow-xxsmall: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-xsmall: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-small: 0 2px 4px -2px rgb(0 0 0 / 0.06),
+    0 4px 8px -2px rgb(0 0 0 / 0.1);
+  --shadow-medium: 0 4px 6px -2px rgb(0 0 0 / 0.03),
+    0 12px 16px -4px rgb(0 0 0 / 0.08);
+  --shadow-large: 0 8px 8px -4px rgb(0 0 0 / 0.03),
+    0 20px 24px -4px rgb(0 0 0 / 0.08);
+  --shadow-xlarge: 0 24px 48px -12px rgb(0 0 0 / 0.18);
+  --shadow-xxlarge: 0 32px 64px -12px rgb(0 0 0 / 0.14);
+
+  /* ── Gradients ──────────────────────────────────────────── */
+  /* Primary CTA fill — measured from the Figma button (blue → violet).
+     Not bound to named color variables in the kit. */
+  --gradient-primary: linear-gradient(112deg, #0d72fc 0%, #703df6 100%);
+
+  /* ── Type scale (desktop) ───────────────────────────────── */
+  --text-h1: 84px;
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -1px;
+  --text-h2: 60px;
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -1px;
+  --text-h3: 48px;
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -1px;
+  --text-h4: 40px;
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -1px;
+  --text-h5: 32px;
+  --text-h5--line-height: 1.3;
+  --text-h5--letter-spacing: -1px;
+  --text-h6: 26px;
+  --text-h6--line-height: 1.4;
+  --text-h6--letter-spacing: -1px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
