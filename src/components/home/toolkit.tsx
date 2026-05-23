@@ -13,26 +13,26 @@ const cards: Card[] = [
   {
     heading: "Guided sessions",
     body: "Step-by-step practice routines that build timing and control from the ground up.",
-    image: "/drummergirl.jpg",
-    alt: "A drummer following a guided practice session",
+    image: "/Layout/419/drum-app-1.jpg",
+    alt: "The Kickline app showing a guided practice session",
   },
   {
     heading: "Skill paths",
     body: "Master double bass, rudiments, hand-foot coordination, and groove in focused drill sequences.",
-    image: "/pearldrumset.jpg",
-    alt: "A full drum kit ready for practice",
+    image: "/Layout/419/drum-app-2.jpg",
+    alt: "The Kickline app showing skill-based training paths",
   },
   {
     heading: "Progress dashboard",
     body: "Watch your BPM, accuracy, and consistency improve with real-time metrics and session history.",
-    image: "/kickline-drum-app.jpg",
-    alt: "The Kickline progress dashboard on a device",
+    image: "/Layout/419/drum-app-3.jpg",
+    alt: "The Kickline progress dashboard with BPM metrics",
   },
   {
     heading: "Daily routines",
     body: "Short, purposeful practice sessions that fit your schedule and keep you moving forward.",
-    image: "/drumsticksontopofsnare.jpg",
-    alt: "Drumsticks resting on a snare drum",
+    image: "/Layout/419/drum-app-4.jpg",
+    alt: "The Kickline app showing a daily practice routine",
   },
 ];
 
