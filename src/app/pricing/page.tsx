@@ -92,7 +92,7 @@ export default function PricingPage() {
         </Container>
       </section>
 
-      <FinalCta />
+      <FinalCta secondary={false} />
     </>
   );
 }

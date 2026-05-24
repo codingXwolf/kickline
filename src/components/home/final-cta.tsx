@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { ButtonLink, Container } from "@/components/ui";
 
-export function FinalCta() {
+type FinalCtaProps = {
+  // Secondary action; pass `false` to render a single primary CTA.
+  secondary?: { label: string; href: string } | false;
+};
+
+export function FinalCta({
+  secondary = { label: "Pricing", href: "/pricing" },
+}: FinalCtaProps = {}) {
   return (
     <section className="bg-background">
       <div className="relative overflow-hidden">
@@ -16,9 +23,11 @@ export function FinalCta() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <ButtonLink href="/about#waitlist">Start</ButtonLink>
-            <ButtonLink href="/pricing" variant="secondary">
-              Pricing
-            </ButtonLink>
+            {secondary && (
+              <ButtonLink href={secondary.href} variant="secondary">
+                {secondary.label}
+              </ButtonLink>
+            )}
           </div>
         </Container>
       </div>
