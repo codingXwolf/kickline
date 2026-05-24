@@ -1,40 +1,65 @@
+import Image from "next/image";
 import { Container, Eyebrow } from "@/components/ui";
 
 const stats = [
-  { value: "+34 BPM", label: "Average double-bass gain in 8 weeks" },
-  { value: "12 min", label: "Median daily session length" },
-  { value: "21 days", label: "Average streak before a path is cleared" },
-  { value: "92%", label: "Of users hit their first tempo target" },
+  { value: "47%", label: "Average speed increase" },
+  { value: "89%", label: "Timing accuracy improvement" },
+  { value: "94%", label: "Completion rate on drills" },
 ];
 
 export function Results() {
   return (
-    <section className="border-t border-border py-24">
+    <section className="py-24">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="max-w-xl">
-            <Eyebrow>Progress you can measure</Eyebrow>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Real numbers, not a vague sense you&apos;re getting better.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-neutral-light">
-              Kickline logs every tempo, every session, every streak. Improvement
-              stops being a feeling and starts being a chart you can point at.
-            </p>
-          </div>
+        <div className="mx-auto max-w-2xl text-center">
+          <Eyebrow>Results</Eyebrow>
+          <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+            The numbers speak
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-neutral-light">
+            Users who stick with structured practice see measurable gains in
+            weeks, not months.
+          </p>
+        </div>
 
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border">
+        <div className="mt-16 grid items-center gap-12 lg:grid-cols-3 lg:gap-16">
+          {/* Stats */}
+          <dl className="space-y-10">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-background p-8">
-                <dt className="font-display text-4xl font-bold text-dodger">
+              <div key={stat.label}>
+                <dt className="font-display text-6xl font-bold tracking-tight text-dodger md:text-7xl">
                   {stat.value}
                 </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-neutral-light">
+                <dd className="mt-2 text-lg font-medium text-neutral-light">
                   {stat.label}
                 </dd>
               </div>
             ))}
           </dl>
+
+          {/* Demo video placeholder */}
+          <div className="relative aspect-video overflow-hidden rounded-2xl border border-border lg:col-span-2">
+            <Image
+              src="/drumsliveshow.jpg"
+              alt="A Kickline practice demo"
+              fill
+              sizes="(min-width: 1024px) 66vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 grid place-items-center">
+              <span className="grid size-16 place-items-center rounded-full bg-white shadow-lg">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden
+                  className="size-6 translate-x-0.5 text-dodger"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
