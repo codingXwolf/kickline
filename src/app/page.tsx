@@ -5,6 +5,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { Drills } from "@/components/home/drills";
 import { Results } from "@/components/home/results";
 import { Testimonials } from "@/components/home/testimonials";
+import { Pricing } from "@/components/home/pricing";
 import { FinalCta } from "@/components/home/final-cta";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Drills />
       <Testimonials />
       <Results />
+      <Pricing />
       <FinalCta />
     </>
   );

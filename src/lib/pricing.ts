@@ -1,8 +1,8 @@
 export type Plan = {
   name: string;
+  subtitle: string;
   price: string;
   cadence: string;
-  tagline: string;
   features: string[];
   cta: string;
   featured?: boolean;
@@ -10,44 +10,43 @@ export type Plan = {
 
 export const plans: Plan[] = [
   {
-    name: "Free",
+    name: "Free tier",
+    subtitle: "Forever free",
     price: "$0",
-    cadence: "forever",
-    tagline: "Build the habit. See if the system clicks.",
+    cadence: "No credit card",
     features: [
-      "1 active training path",
-      "Daily warm-up routine",
-      "Core rudiment drills",
-      "Basic streak tracking",
+      "Daily guided drills",
+      "Basic progress tracking",
+      "Core rudiment exercises",
     ],
     cta: "Start free",
   },
   {
-    name: "Pro",
-    price: "$9",
-    cadence: "per month",
-    tagline: "The full coaching system for serious progress.",
+    name: "Pro plan",
+    subtitle: "Most popular choice",
+    price: "$9.99",
+    cadence: "or $99 yearly",
     features: [
-      "All training paths",
-      "Adaptive daily sessions",
-      "Full drill library + tempo targets",
-      "Progress charts & BPM history",
-      "Hand-foot coordination labs",
+      "Advanced drill paths",
+      "Detailed performance metrics",
+      "Custom practice routines",
+      "Offline mode access",
     ],
-    cta: "Start 14-day trial",
+    cta: "Upgrade now",
     featured: true,
   },
   {
-    name: "Annual",
-    price: "$79",
-    cadence: "per year",
-    tagline: "Everything in Pro. Two months on the house.",
+    name: "Elite tier",
+    subtitle: "For serious drummers",
+    price: "$19.99",
+    cadence: "or $199 yearly",
     features: [
       "Everything in Pro",
-      "Save 27% vs monthly",
-      "Early access to new drills",
-      "Downloadable practice logs",
+      "One-on-one coaching calls",
+      "Priority feature requests",
+      "Exclusive masterclass content",
+      "Direct feedback on recordings",
     ],
-    cta: "Go annual",
+    cta: "Go elite",
   },
 ];
