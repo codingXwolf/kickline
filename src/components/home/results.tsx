@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container, Eyebrow } from "@/components/ui";
 
 const stats = [
@@ -37,28 +36,18 @@ export function Results() {
             ))}
           </dl>
 
-          {/* Demo video placeholder */}
+          {/* Demo video */}
           <div className="relative aspect-video overflow-hidden rounded-2xl border border-border lg:col-span-2">
-            <Image
-              src="/drumsliveshow.jpg"
-              alt="A Kickline practice demo"
-              fill
-              sizes="(min-width: 1024px) 66vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 grid place-items-center">
-              <span className="grid size-16 place-items-center rounded-full bg-white shadow-lg">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden
-                  className="size-6 translate-x-0.5 text-dodger"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
-            </div>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/drumsliveshow.jpg"
+              className="size-full object-cover"
+            >
+              <source src="/drum-video.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </Container>
