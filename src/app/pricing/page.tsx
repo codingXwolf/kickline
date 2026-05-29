@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ButtonLink, Container, Eyebrow } from "@/components/ui";
+import { PricingHero } from "@/components/pricing-hero";
 import { PricingCards } from "@/components/pricing-cards";
+import { PricingComparison } from "@/components/pricing-comparison";
 import { FinalCta } from "@/components/home/final-cta";
 
 export const metadata: Metadata = {
@@ -36,34 +38,45 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.15),_transparent_60%)]" />
-        <Container className="relative py-20 text-center md:py-24">
-          <Eyebrow>Plans</Eyebrow>
-          <h1 className="mx-auto mt-4 max-w-3xl text-balance text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
-            Find your fit
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-neutral-light">
-            Every plan includes full access to guided drills and progress
-            tracking. Start free, upgrade when ready.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <ButtonLink href="/about#waitlist">Start free</ButtonLink>
-            <ButtonLink href="#faq" variant="secondary">
-              Read the FAQ
-            </ButtonLink>
-          </div>
-        </Container>
-      </section>
+      <PricingHero />
 
       {/* Plans */}
       <section className="py-20">
         <Container>
-          <PricingCards />
+          <div className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Tiers</Eyebrow>
+            <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+              Three tiers
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-neutral-light">
+              Pick what matches your commitment level.
+            </p>
+          </div>
+          <div className="mt-12">
+            <PricingCards />
+          </div>
           <p className="mt-8 text-center text-sm text-neutral">
             Every plan includes daily drills, the metronome, and progress
             tracking. Prices in USD.
           </p>
+        </Container>
+      </section>
+
+      {/* Compare — what's included at each tier */}
+      <section id="compare" className="scroll-mt-20 border-t border-border py-24">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Compare</Eyebrow>
+            <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+              What&apos;s included
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-neutral-light">
+              See exactly what you get at each level.
+            </p>
+          </div>
+          <div className="mx-auto mt-12 max-w-5xl">
+            <PricingComparison />
+          </div>
         </Container>
       </section>
 
@@ -89,6 +102,21 @@ export default function PricingPage() {
               </div>
             ))}
           </dl>
+
+          <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-border bg-woodsmoke/40 px-6 py-8 text-center">
+            <h3 className="text-xl font-semibold text-white">
+              Still have questions?
+            </h3>
+            <p className="mx-auto mt-2 max-w-md text-base leading-relaxed text-neutral-light">
+              Reach out and we&apos;ll help you find the plan that fits your
+              practice.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <ButtonLink href="/about#waitlist" variant="secondary">
+                Contact us
+              </ButtonLink>
+            </div>
+          </div>
         </Container>
       </section>
 

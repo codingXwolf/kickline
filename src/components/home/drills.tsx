@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, Container, Eyebrow } from "@/components/ui";
@@ -35,6 +35,38 @@ const drills: Drill[] = [
 
 export function Drills() {
   const [active, setActive] = useState(0);
+  const tabRefs = useRef<HTMLButtonElement[]>([]);
+
+  // On touch / mobile (no hover), highlight the drill that scrolls into view.
+  // Desktop uses hover instead, so the scroll-spy is disabled there.
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    let observer: IntersectionObserver | undefined;
+
+    const setup = () => {
+      observer?.disconnect();
+      if (desktop.matches) return;
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActive(Number(entry.target.getAttribute("data-index")));
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+      );
+      tabRefs.current.filter(Boolean).forEach((el) => observer?.observe(el));
+    };
+
+    setup();
+    desktop.addEventListener("change", setup);
+    return () => {
+      observer?.disconnect();
+      desktop.removeEventListener("change", setup);
+    };
+  }, []);
 
   return (
     <section className="py-24">
@@ -73,13 +105,17 @@ export function Drills() {
               return (
                 <button
                   key={drill.heading}
+                  ref={(node) => {
+                    if (node) tabRefs.current[index] = node;
+                  }}
+                  data-index={index}
                   type="button"
                   onClick={() => setActive(index)}
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
                   aria-pressed={isActive}
                   className={`block w-full border-t border-l-2 py-5 pl-5 text-left transition-colors ${
-                    isActive
-                      ? "border-l-dodger"
-                      : "border-l-transparent hover:border-l-border"
+                    isActive ? "border-l-dodger" : "border-l-transparent"
                   }`}
                 >
                   <h3

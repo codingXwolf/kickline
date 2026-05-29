@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ButtonLink, Container, Eyebrow } from "@/components/ui";
+import { Container, Eyebrow } from "@/components/ui";
 import { WaitlistForm } from "@/components/waitlist-form";
+import { AboutHero } from "@/components/about-hero";
+import { Reveal } from "@/components/reveal";
+import { FloatingDrummer } from "@/components/floating-drummer";
 
 export const metadata: Metadata = {
   title: "About — Kickline",
@@ -64,30 +67,12 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.15),_transparent_60%)]" />
-        <Container className="relative py-20 text-center md:py-28">
-          <Eyebrow>Purpose</Eyebrow>
-          <h1 className="mx-auto mt-4 max-w-3xl text-balance text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
-            Built for drummers who want to get better—for real
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-neutral-light">
-            Kickline exists because random practice doesn&apos;t work. Structure
-            does.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <ButtonLink href="#waitlist">Join the waitlist</ButtonLink>
-            <ButtonLink href="/pricing" variant="secondary">
-              See pricing
-            </ButtonLink>
-          </div>
-        </Container>
-      </section>
+      <AboutHero />
 
       {/* Story */}
       <section className="border-b border-border py-24">
         <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <Reveal>
             <Eyebrow>Our mission</Eyebrow>
             <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
               Random practice plateaus. Structure breaks through.
@@ -103,23 +88,25 @@ export default function AboutPage() {
               and drills with tempo targets you can beat. Less guessing, more
               measurable progress — and the numbers to prove it.
             </p>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
-            <Image
-              src="/carlos-coronado-XJ0-Q40qygw-unsplash.jpg"
-              alt="A drummer practicing at home"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-          </div>
+          </Reveal>
+          <Reveal y={36} className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+              <Image
+                src="/carlos-coronado-XJ0-Q40qygw-unsplash.jpg"
+                alt="A drummer practicing at home"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Team */}
       <section className="border-b border-border py-24">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <Eyebrow>Creators</Eyebrow>
             <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
               The people behind it
@@ -127,18 +114,21 @@ export default function AboutPage() {
             <p className="mt-5 text-lg leading-relaxed text-neutral-light">
               Built by drummers, for drummers.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mx-auto mt-16 grid max-w-4xl gap-10 sm:grid-cols-3">
+          <Reveal
+            stagger={0.12}
+            className="mx-auto mt-16 grid max-w-4xl gap-10 sm:grid-cols-3"
+          >
             {team.map((member) => (
-              <div key={member.name} className="text-center sm:text-left">
-                <div className="relative aspect-square overflow-hidden rounded-2xl border border-border">
+              <div key={member.name} className="group text-center sm:text-left">
+                <div className="relative aspect-square overflow-hidden rounded-2xl border border-border transition-colors duration-500 group-hover:border-dodger/60">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
                     sizes="(min-width: 640px) 33vw, 100vw"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">
@@ -156,24 +146,29 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Waitlist */}
-      <section id="waitlist" className="scroll-mt-20 py-24">
-        <Container className="mx-auto max-w-2xl text-center">
-          <Eyebrow>Join the waitlist</Eyebrow>
-          <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
-            Be first behind the kit
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-balance text-lg leading-relaxed text-neutral-light">
-            Kickline is in development. Drop your email and we&apos;ll let you know
-            the moment early access opens — no spam, just the count-in.
-          </p>
-          <div className="mx-auto mt-10 max-w-md text-left">
-            <WaitlistForm />
-          </div>
+      <section id="waitlist" className="scroll-mt-20 overflow-hidden py-24">
+        <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <Reveal className="order-2 lg:order-1">
+            <Eyebrow>Join the waitlist</Eyebrow>
+            <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+              Be first behind the kit
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-light">
+              Kickline is in development. Drop your email and we&apos;ll let you
+              know the moment early access opens — no spam, just the count-in.
+            </p>
+            <div className="mt-10 max-w-md">
+              <WaitlistForm />
+            </div>
+          </Reveal>
+          <Reveal y={36} className="order-1 flex justify-center lg:order-2">
+            <FloatingDrummer />
+          </Reveal>
         </Container>
       </section>
     </>

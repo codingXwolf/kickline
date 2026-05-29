@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,6 +10,9 @@ import highHat from "../../../public/illustrations/Drum-kit-highhat.svg";
 import drumLeft from "../../../public/illustrations/drum-left.png";
 import drumRight from "../../../public/illustrations/drum-right.png";
 
+const HERO_COPY =
+  "Kickline is your personal practice coach. Structured drills, real progress, measurable results. Stop guessing. Start improving.";
+
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -17,6 +20,7 @@ export function Hero() {
   const actionsRef = useRef<HTMLDivElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
   const beatBarsRef = useRef<HTMLSpanElement[]>([]);
+  const wordsRef = useRef<HTMLSpanElement[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -46,11 +50,12 @@ export function Hero() {
         return;
       }
 
-      gsap.set([copyRef.current, actionsRef.current], {
+      gsap.set(actionsRef.current, {
         autoAlpha: 0,
         y: 18,
       });
-      gsap.set(headlineRef.current, { autoAlpha: 0, y: 28 });
+      gsap.set(wordsRef.current, { autoAlpha: 0, y: 14 });
+      gsap.set(headlineRef.current, { autoAlpha: 0, y: 28, scale: 0.92 });
       gsap.set(imageWrapRef.current, { autoAlpha: 0, scale: 1.06, y: 36 });
       gsap.set(accents, {
         autoAlpha: 0,
@@ -73,7 +78,13 @@ export function Hero() {
 
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .to(headlineRef.current, { autoAlpha: 1, y: 0, duration: 0.9 })
+        .to(headlineRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+          ease: "back.out(2.4)",
+        })
         .to(
           accents,
           {
@@ -84,8 +95,18 @@ export function Hero() {
           },
           "-=0.45",
         )
-        .to(copyRef.current, { autoAlpha: 1, y: 0, duration: 0.65 }, "-=0.35")
-        .to(actionsRef.current, { autoAlpha: 1, y: 0, duration: 0.55 }, "-=0.3")
+        .to(
+          wordsRef.current,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.45,
+            ease: "back.out(2)",
+            stagger: 0.05,
+          },
+          "-=0.3",
+        )
+        .to(actionsRef.current, { autoAlpha: 1, y: 0, duration: 0.55 }, "-=0.25")
         .to(
           imageWrapRef.current,
           { autoAlpha: 1, scale: 1, y: 0, duration: 1 },
@@ -115,6 +136,20 @@ export function Hero() {
           ease: "elastic.out(1, 0.45)",
         });
 
+      // Headline keeps a subtle on-beat pulse, like it's locked to a metronome.
+      gsap
+        .timeline({ repeat: -1, repeatDelay: 0.62, delay: 2.1 })
+        .to(headlineRef.current, {
+          scale: 1.015,
+          duration: 0.12,
+          ease: "power2.out",
+        })
+        .to(headlineRef.current, {
+          scale: 1,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.5)",
+        });
+
       pulseFields.forEach((field) => {
         const rings = gsap.utils.toArray<HTMLElement>(
           field.querySelectorAll(".hero-pulse-ring"),
@@ -139,24 +174,24 @@ export function Hero() {
       });
 
       gsap
-        .timeline({ repeat: -1, repeatDelay: 0.45 })
+        .timeline({ repeat: -1, repeatDelay: 0.95 })
         .to(".hero-stick-left", {
           rotation: -24,
-          duration: 0.1,
+          duration: 0.22,
           ease: "power2.in",
         })
         .to(
           ".hero-stick-right",
           {
             rotation: 24,
-            duration: 0.1,
+            duration: 0.22,
             ease: "power2.in",
           },
-          "<0.08",
+          "<0.16",
         )
         .to([".hero-stick-left", ".hero-stick-right"], {
           rotation: (index) => (index === 0 ? -34 : 34),
-          duration: 0.28,
+          duration: 0.55,
           ease: "back.out(3)",
         });
 
@@ -214,70 +249,70 @@ export function Hero() {
         <div className="relative mx-auto max-w-3xl">
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-10 top-2 z-20 hidden h-24 w-24 items-center justify-center lg:flex xl:-left-14"
+            className="hero-drum-accent pointer-events-none absolute -left-5 top-2 z-20 flex h-10 w-10 items-center justify-center sm:-left-10 sm:h-24 sm:w-24 xl:-left-14"
           >
-            <div className="hero-drum-hit relative flex h-24 w-24 items-center justify-center">
-              <span className="hero-pulse-field absolute inset-0">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50" />
+            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
+              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
               </span>
               <Image
                 src={drumLeft}
                 alt=""
                 aria-hidden
-                className="relative h-[88px] w-auto object-contain"
+                className="relative h-9 w-auto object-contain sm:h-[88px]"
               />
             </div>
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-10 top-2 z-20 hidden h-24 w-24 items-center justify-center lg:flex xl:-right-14"
+            className="hero-drum-accent pointer-events-none absolute -right-5 top-2 z-20 flex h-10 w-10 items-center justify-center sm:-right-10 sm:h-24 sm:w-24 xl:-right-14"
           >
-            <div className="hero-drum-hit relative flex h-24 w-24 items-center justify-center">
-              <span className="hero-pulse-field absolute inset-0">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50" />
+            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
+              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
               </span>
               <Image
                 src={highHat}
                 alt=""
                 aria-hidden
-                className="relative h-[88px] w-auto object-contain"
+                className="relative h-9 w-auto object-contain sm:h-[88px]"
               />
             </div>
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-10 top-[15.25rem] z-20 hidden h-24 w-24 items-center justify-center lg:flex xl:-left-14"
+            className="hero-drum-accent pointer-events-none absolute -left-5 top-[13rem] z-20 flex h-10 w-10 items-center justify-center sm:-left-10 sm:top-[15.25rem] sm:h-24 sm:w-24 xl:-left-14"
           >
-            <div className="hero-drum-hit relative flex h-24 w-24 items-center justify-center">
-              <span className="hero-pulse-field absolute inset-0">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50" />
+            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
+              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
+                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
               </span>
               <Image
                 src={floorTom}
                 alt=""
                 aria-hidden
-                className="relative h-[78px] w-auto object-contain"
+                className="relative h-8 w-auto object-contain sm:h-[78px]"
               />
             </div>
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-10 top-[15.25rem] z-20 hidden h-24 w-24 items-center justify-center lg:flex xl:-right-14"
+            className="hero-drum-accent pointer-events-none absolute -right-5 top-[13rem] z-20 flex h-10 w-10 items-center justify-center sm:-right-10 sm:top-[15.25rem] sm:h-24 sm:w-24 xl:-right-14"
           >
-            <div className="hero-drum-hit relative flex h-24 w-24 items-center justify-center">
-              <div className="relative flex h-24 w-24 -translate-x-2 items-center justify-center">
-                <span className="hero-pulse-field absolute inset-0">
-                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[86px] w-[86px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60" />
-                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50" />
+            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
+              <div className="relative flex h-10 w-10 -translate-x-2 items-center justify-center sm:h-24 sm:w-24">
+                <span className="hero-pulse-field absolute inset-0 hidden sm:block">
+                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
+                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
                 </span>
                 <Image
                   src={drumRight}
                   alt=""
                   aria-hidden
-                  className="relative h-[88px] w-auto object-contain"
+                  className="relative h-9 w-auto object-contain sm:h-[88px]"
                 />
               </div>
             </div>
@@ -285,7 +320,7 @@ export function Hero() {
 
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-24 left-1/2 z-0 hidden h-20 w-52 -translate-x-1/2 sm:block"
+            className="pointer-events-none absolute -top-24 left-1/2 z-0 block h-20 w-52 -translate-x-1/2"
           >
             <span className="absolute left-1/2 top-11 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 bg-dodger/25 shadow-[0_0_22px_rgb(59_130_246_/_0.55)]" />
             <span className="absolute left-1/2 top-11 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/20" />
@@ -309,8 +344,18 @@ export function Hero() {
             ref={copyRef}
             className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-neutral-light sm:text-xl"
           >
-            Kickline is your personal practice coach. Structured drills, real
-            progress, measurable results. Stop guessing. Start improving.
+            {HERO_COPY.split(" ").map((word, index) => (
+              <Fragment key={index}>
+                <span
+                  ref={(node) => {
+                    if (node) wordsRef.current[index] = node;
+                  }}
+                  className="inline-block"
+                >
+                  {word}
+                </span>{" "}
+              </Fragment>
+            ))}
           </p>
           <div
             ref={actionsRef}
@@ -329,10 +374,11 @@ export function Hero() {
         className="relative aspect-[16/9] w-full overflow-hidden"
       >
         <Image
-          src="/hero-drummer-smaller.jpg"
+          src="/hero-header-fullsize.jpg"
           alt="A drummer practicing with the Kickline app on a stand beside the kit"
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="object-cover"
         />
