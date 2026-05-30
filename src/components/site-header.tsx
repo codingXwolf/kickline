@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, Container } from "@/components/ui";
+import { MobileNav } from "@/components/mobile-nav";
 import kicklineLogo from "../../public/kickline-logo-nav.svg";
 
 const navLinks = [
@@ -37,17 +38,17 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-3">
-          <ButtonLink
-            href="/about#waitlist"
-            variant="secondary"
-            size="sm"
-            className="hidden sm:inline-flex"
-          >
-            Sign in
-          </ButtonLink>
+          {/* Wrapper handles responsive hiding — ButtonLink's base `inline-flex`
+              would otherwise override a `hidden` utility placed on it directly. */}
+          <span className="hidden md:inline-flex">
+            <ButtonLink href="/about#waitlist" variant="secondary" size="sm">
+              Sign in
+            </ButtonLink>
+          </span>
           <ButtonLink href="/about#waitlist" size="sm">
             Get started
           </ButtonLink>
+          <MobileNav links={navLinks} />
         </div>
       </Container>
     </header>
