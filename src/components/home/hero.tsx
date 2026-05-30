@@ -249,7 +249,7 @@ export function Hero() {
         <div className="relative mx-auto max-w-3xl">
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-5 top-2 z-20 flex h-10 w-10 items-center justify-center sm:-left-10 sm:h-24 sm:w-24 xl:-left-14"
+            className="hero-drum-accent pointer-events-none absolute -left-5 top-2 z-20 hidden h-10 w-10 items-center justify-center sm:-left-10 sm:flex sm:h-24 sm:w-24 xl:-left-14"
           >
             <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
               <span className="hero-pulse-field absolute inset-0 hidden sm:block">
@@ -266,7 +266,7 @@ export function Hero() {
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-5 top-2 z-20 flex h-10 w-10 items-center justify-center sm:-right-10 sm:h-24 sm:w-24 xl:-right-14"
+            className="hero-drum-accent pointer-events-none absolute -right-5 top-2 z-20 hidden h-10 w-10 items-center justify-center sm:-right-10 sm:flex sm:h-24 sm:w-24 xl:-right-14"
           >
             <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
               <span className="hero-pulse-field absolute inset-0 hidden sm:block">
@@ -283,7 +283,7 @@ export function Hero() {
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-5 top-[13rem] z-20 flex h-10 w-10 items-center justify-center sm:-left-10 sm:top-[15.25rem] sm:h-24 sm:w-24 xl:-left-14"
+            className="hero-drum-accent pointer-events-none absolute -left-5 top-[13rem] z-20 hidden h-10 w-10 items-center justify-center sm:-left-10 sm:top-[15.25rem] sm:flex sm:h-24 sm:w-24 xl:-left-14"
           >
             <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
               <span className="hero-pulse-field absolute inset-0 hidden sm:block">
@@ -300,7 +300,7 @@ export function Hero() {
           </div>
           <div
             aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-5 top-[13rem] z-20 flex h-10 w-10 items-center justify-center sm:-right-10 sm:top-[15.25rem] sm:h-24 sm:w-24 xl:-right-14"
+            className="hero-drum-accent pointer-events-none absolute -right-5 top-[13rem] z-20 hidden h-10 w-10 items-center justify-center sm:-right-10 sm:top-[15.25rem] sm:flex sm:h-24 sm:w-24 xl:-right-14"
           >
             <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
               <div className="relative flex h-10 w-10 -translate-x-2 items-center justify-center sm:h-24 sm:w-24">
