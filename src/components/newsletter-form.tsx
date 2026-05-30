@@ -33,11 +33,11 @@ export function NewsletterForm() {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
         placeholder="Your email"
-        className="h-12 flex-1 rounded-md border border-border bg-background/60 px-4 text-sm text-white placeholder:text-neutral focus:border-dodger focus:outline-none"
+        className="h-14 flex-1 rounded-lg border border-border bg-white/[0.04] px-5 text-base text-white transition placeholder:text-neutral focus:border-dodger focus:outline-none focus:ring-2 focus:ring-dodger/30"
       />
       <button
         type="submit"
-        className="h-12 rounded-md border border-border bg-white/10 px-6 text-sm font-medium text-white transition-colors hover:bg-white/15"
+        className="inline-flex h-14 items-center justify-center rounded-full border border-border bg-white/10 px-7 text-sm font-medium text-white transition-colors hover:bg-white/15"
       >
         Subscribe
       </button>

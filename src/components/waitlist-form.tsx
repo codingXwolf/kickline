@@ -42,11 +42,11 @@ export function WaitlistForm() {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
         placeholder="you@email.com"
-        className="h-12 flex-1 rounded-md border border-border bg-foreground/40 px-4 text-sm text-white placeholder:text-neutral focus:border-dodger focus:outline-none"
+        className="h-14 flex-1 rounded-lg border border-border bg-white/[0.04] px-5 text-base text-white transition placeholder:text-neutral focus:border-dodger focus:outline-none focus:ring-2 focus:ring-dodger/30"
       />
       <button
         type="submit"
-        className="inline-flex items-center justify-center rounded-full bg-[image:var(--gradient-primary)] px-6 py-3 text-base font-medium text-white transition hover:brightness-110"
+        className="inline-flex h-14 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] px-7 text-base font-medium text-white transition hover:brightness-110"
       >
         Join the waitlist
       </button>
