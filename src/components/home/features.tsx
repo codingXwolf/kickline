@@ -87,7 +87,7 @@ export function Features() {
                 top: `calc(6rem + ${index * 2}rem)`,
                 zIndex: index + 1,
               }}
-              className="sticky overflow-hidden rounded-3xl border border-border bg-woodsmoke p-6 shadow-2xl shadow-black/60 md:p-10"
+              className="overflow-hidden rounded-3xl border border-border bg-woodsmoke p-6 shadow-2xl shadow-black/60 md:sticky md:p-10"
             >
               <div className="flex items-center gap-4 text-sm">
                 <span className="font-display font-bold text-dodger">
@@ -96,18 +96,18 @@ export function Features() {
                 <span className="text-neutral-light">{feature.label}</span>
               </div>
 
-              <div className="mt-8 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div className="mt-6 grid items-center gap-6 md:mt-8 lg:grid-cols-2 lg:gap-16">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.12em] text-dodger-light">
                     {feature.tagline}
                   </p>
-                  <h2 className="mt-4 text-balance text-4xl font-bold tracking-tight text-white md:text-5xl">
+                  <h2 className="mt-3 text-balance text-2xl font-bold tracking-tight text-white sm:text-3xl md:mt-4 md:text-5xl">
                     {feature.heading}
                   </h2>
-                  <p className="mt-5 max-w-md text-lg leading-relaxed text-neutral-light">
+                  <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-light sm:text-lg md:mt-5">
                     {feature.body}
                   </p>
-                  <div className="mt-8 flex items-center gap-5">
+                  <div className="mt-6 flex items-center gap-5 md:mt-8">
                     <ButtonLink href="/about" variant="secondary" size="sm">
                       Learn more
                     </ButtonLink>
@@ -115,7 +115,7 @@ export function Features() {
                   </div>
                 </div>
 
-                <div className="relative aspect-square overflow-hidden rounded-2xl border border-border">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border sm:aspect-square">
                   <Image
                     src={feature.image}
                     alt={feature.alt}
