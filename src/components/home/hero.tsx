@@ -5,10 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ButtonLink, Container } from "@/components/ui";
-import floorTom from "../../../public/illustrations/Floor Tom.svg";
-import highHat from "../../../public/illustrations/Drum-kit-highhat.svg";
-import drumLeft from "../../../public/illustrations/drum-left.png";
-import drumRight from "../../../public/illustrations/drum-right.png";
 
 const HERO_COPY =
   "Kickline is your personal practice coach. Structured drills, real progress, measurable results. Stop guessing. Start improving.";
@@ -29,10 +25,6 @@ export function Hero() {
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const accents = gsap.utils.toArray<HTMLElement>(".hero-drum-accent");
-      const hitTargets = gsap.utils.toArray<HTMLElement>(".hero-drum-hit");
-      const pulseFields = gsap.utils.toArray<HTMLElement>(".hero-pulse-field");
-      const pulseRings = gsap.utils.toArray<HTMLElement>(".hero-pulse-ring");
 
       if (prefersReducedMotion) {
         gsap.set(
@@ -41,12 +33,9 @@ export function Hero() {
             copyRef.current,
             actionsRef.current,
             imageWrapRef.current,
-            ...accents,
-            ...hitTargets,
           ],
           { autoAlpha: 1, clearProps: "transform" },
         );
-        gsap.set(pulseRings, { autoAlpha: 0 });
         return;
       }
 
@@ -57,23 +46,10 @@ export function Hero() {
       gsap.set(wordsRef.current, { autoAlpha: 0, y: 14 });
       gsap.set(headlineRef.current, { autoAlpha: 0, y: 28, scale: 0.92 });
       gsap.set(imageWrapRef.current, { autoAlpha: 0, scale: 1.06, y: 36 });
-      gsap.set(accents, {
-        autoAlpha: 0,
-        scale: 0.82,
-      });
       gsap.set(beatBarsRef.current, {
         scaleY: 0.28,
         transformOrigin: "bottom center",
         autoAlpha: 0.35,
-      });
-      gsap.set(hitTargets, {
-        scale: 1,
-        transformOrigin: "center center",
-      });
-      gsap.set(pulseRings, {
-        autoAlpha: 0,
-        scale: 0.58,
-        transformOrigin: "center center",
       });
 
       gsap
@@ -85,16 +61,6 @@ export function Hero() {
           duration: 0.7,
           ease: "back.out(2.4)",
         })
-        .to(
-          accents,
-          {
-            autoAlpha: 1,
-            scale: 1,
-            duration: 0.55,
-            stagger: 0.07,
-          },
-          "-=0.45",
-        )
         .to(
           wordsRef.current,
           {
@@ -113,29 +79,6 @@ export function Hero() {
           "-=0.55",
         );
 
-      gsap.to(accents, {
-        y: (index) => (index % 2 === 0 ? -10 : 10),
-        rotation: (index) => (index % 2 === 0 ? -2 : 2),
-        duration: 2.4,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.18,
-      });
-
-      gsap
-        .timeline({ repeat: -1, repeatDelay: 0.7 })
-        .to(hitTargets, {
-          scale: 1.06,
-          duration: 0.12,
-          ease: "power2.out",
-        })
-        .to(hitTargets, {
-          scale: 1,
-          duration: 0.24,
-          ease: "elastic.out(1, 0.45)",
-        });
-
       // Headline keeps a subtle on-beat pulse, like it's locked to a metronome.
       gsap
         .timeline({ repeat: -1, repeatDelay: 0.62, delay: 2.1 })
@@ -149,29 +92,6 @@ export function Hero() {
           duration: 0.5,
           ease: "elastic.out(1, 0.5)",
         });
-
-      pulseFields.forEach((field) => {
-        const rings = gsap.utils.toArray<HTMLElement>(
-          field.querySelectorAll(".hero-pulse-ring"),
-        );
-
-        gsap
-          .timeline({
-            repeat: -1,
-            repeatDelay: 0.72,
-          })
-          .fromTo(
-            rings,
-            { autoAlpha: 0.5, scale: 0.58 },
-            {
-              autoAlpha: 0,
-              scale: 1.32,
-              duration: 0.82,
-              ease: "power2.out",
-              stagger: 0.08,
-            },
-          );
-      });
 
       gsap
         .timeline({ repeat: -1, repeatDelay: 0.95 })
@@ -247,77 +167,6 @@ export function Hero() {
     <section ref={heroRef} className="relative overflow-hidden bg-background">
       <Container className="pt-24 pb-16 text-center md:pt-28">
         <div className="relative mx-auto max-w-3xl">
-          <div
-            aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-5 top-2 z-20 hidden h-10 w-10 items-center justify-center sm:-left-10 sm:flex sm:h-24 sm:w-24 xl:-left-14"
-          >
-            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
-              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
-              </span>
-              <Image
-                src={drumLeft}
-                alt=""
-                aria-hidden
-                className="relative h-9 w-auto object-contain sm:h-[88px]"
-              />
-            </div>
-          </div>
-          <div
-            aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-5 top-2 z-20 hidden h-10 w-10 items-center justify-center sm:-right-10 sm:flex sm:h-24 sm:w-24 xl:-right-14"
-          >
-            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
-              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
-              </span>
-              <Image
-                src={highHat}
-                alt=""
-                aria-hidden
-                className="relative h-9 w-auto object-contain sm:h-[88px]"
-              />
-            </div>
-          </div>
-          <div
-            aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -left-5 top-[13rem] z-20 hidden h-10 w-10 items-center justify-center sm:-left-10 sm:top-[15.25rem] sm:flex sm:h-24 sm:w-24 xl:-left-14"
-          >
-            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
-              <span className="hero-pulse-field absolute inset-0 hidden sm:block">
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
-                <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
-              </span>
-              <Image
-                src={floorTom}
-                alt=""
-                aria-hidden
-                className="relative h-8 w-auto object-contain sm:h-[78px]"
-              />
-            </div>
-          </div>
-          <div
-            aria-hidden
-            className="hero-drum-accent pointer-events-none absolute -right-5 top-[13rem] z-20 hidden h-10 w-10 items-center justify-center sm:-right-10 sm:top-[15.25rem] sm:flex sm:h-24 sm:w-24 xl:-right-14"
-          >
-            <div className="hero-drum-hit relative flex h-10 w-10 items-center justify-center sm:h-24 sm:w-24">
-              <div className="relative flex h-10 w-10 -translate-x-2 items-center justify-center sm:h-24 sm:w-24">
-                <span className="hero-pulse-field absolute inset-0 hidden sm:block">
-                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger/60 sm:h-[86px] sm:w-[86px]" />
-                  <span className="hero-pulse-ring absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dodger-light/50 sm:h-[68px] sm:w-[68px]" />
-                </span>
-                <Image
-                  src={drumRight}
-                  alt=""
-                  aria-hidden
-                  className="relative h-9 w-auto object-contain sm:h-[88px]"
-                />
-              </div>
-            </div>
-          </div>
-
           <div
             aria-hidden
             className="pointer-events-none absolute -top-24 left-1/2 z-0 block h-20 w-52 -translate-x-1/2"
